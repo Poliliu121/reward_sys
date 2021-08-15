@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Add costume MVC Config, so we can access index.html directly
+ */
 @Configuration
 public class MyMVCConfig implements WebMvcConfigurer {
     @Bean
@@ -14,8 +17,7 @@ public class MyMVCConfig implements WebMvcConfigurer {
         return new WebMvcConfigurer() {
             @Override
             public void addViewControllers(ViewControllerRegistry registry) {
-                registry.addViewController("/").setViewName("index");
-                registry.addViewController("/index.html").setViewName("index");
+                registry.addViewController("/*").setViewName("index");
             }
 
         };

@@ -5,7 +5,6 @@ import com.pliu.reward_sys.entities.Transaction;
 import com.pliu.reward_sys.service.MyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +16,11 @@ public class RESTctrl {
     @Autowired
     MyService myService;
 
+    /**
+     * Get all the info from back, and put them to front
+     * @param modelAndView
+     * @return
+     */
     @GetMapping("/*")
     public ModelAndView homePage(ModelAndView modelAndView){
 
@@ -29,14 +33,15 @@ public class RESTctrl {
         return modelAndView;
     }
 
+    /**
+     * Mapping with Calculator
+     * @param cost
+     * @return
+     */
     @PostMapping("/cal")
     public ModelAndView calculator(@RequestParam("cost") int cost){
 
         ModelAndView modelAndView = new ModelAndView("redirect:/index.html");
-        Collection<Customer> customerCollection = myService.findAllCustomers();
-        Collection<Transaction> transactionsCollection = myService.findAllTransaction();
-        modelAndView.addObject("customers",customerCollection);
-        modelAndView.addObject("transactions",transactionsCollection);
 
         int credit = myService.calculator(cost);
         modelAndView.addObject("calculator",true);
@@ -46,12 +51,20 @@ public class RESTctrl {
         return modelAndView;
     }
 
+    /**
+     * Redirect part
+     *
+     * @param calculator
+     * @param cost
+     * @param credit
+     * @return
+     */
 
     @GetMapping("/index.html") // calculator=true&cost=123&credit=96
     public ModelAndView redirector(@RequestParam("calculator") boolean calculator,
                                    @RequestParam("cost") int cost,
                                    @RequestParam("credit") int credit){
-        ModelAndView modelAndView = new ModelAndView("index");
+        ModelAndView modelAndView = new ModelAndView("/index");
         if(calculator){
             modelAndView.addObject("cost", cost);
             modelAndView.addObject("credit", credit);

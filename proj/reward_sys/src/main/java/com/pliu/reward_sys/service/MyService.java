@@ -34,15 +34,14 @@ public class MyService {
     public void setReadFiler(ReadFiler readFiler){
         this.readFiler = readFiler;
     }
-    //
+
     @PostConstruct
     public void init (){
-        System.out.println("here we are ");
+        System.out.println("Init Loading..");
         List<Transaction> transactionList = readDataSet();
         for(Transaction tran : transactionList){
             Long customer_Id = tran.getCustomerId();
             int cost = calculator(tran.getTotal_cost());
-//            LocalDate date = tran.getTransDate();
 
             Customer customer = getCustomerById(customer_Id);
             int totalCredits = customer.getTotal_Credits(), threeMonthCredit = customer.getThreeMonthCredits();
@@ -59,7 +58,11 @@ public class MyService {
         }
     }
 
-    // Important method to calculate credit
+    /**
+     * Calculate credit
+     * @param cost
+     * @return
+     */
     public int calculator(int cost){
         int sum =0;
         cost -= 50;
@@ -71,10 +74,19 @@ public class MyService {
         return sum;
     }
 
-    // read Json file
+    /***
+     * Read test data from data.json
+     * @return
+     */
     private List<Transaction> readDataSet(){
         return readFiler.readJson();
     }
+
+    /**
+     * Check month diff
+     * @param t
+     * @return
+     */
 
     private boolean isMonth(Transaction t){
         LocalDate date = t.getTransDate();
@@ -108,8 +120,5 @@ public class MyService {
         return history.stream().filter(this::isMonth).collect(Collectors.toList());
     }
 
-    public List<Transaction> customerHistory(Customer customer){
-        return transactionDAO.findByCustomer(customer);
-    }
 
 }

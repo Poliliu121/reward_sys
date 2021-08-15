@@ -9,6 +9,8 @@ import java.util.*;
 
 @Repository
 public class TransactionDAO {
+
+    // take these 2 map as tables we used to save data.
     private static Map<Customer, Set<Transaction>> personalHistory = null;
     private static Map<Long, Transaction> transactionMap = null;
 

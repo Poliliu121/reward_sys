@@ -9,6 +9,7 @@ import java.util.*;
 
 @Repository
 public class CustomerDAO {
+    // Take this map as a table to save our data.
     private static Map<Long, Customer> customersMap = null;
 
     static {

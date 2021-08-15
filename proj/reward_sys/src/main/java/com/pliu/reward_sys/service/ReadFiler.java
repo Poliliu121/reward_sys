@@ -15,6 +15,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+/**
+ * This component is for loading test data from data.json file.
+ */
 @Component
 public class ReadFiler{
 

@@ -2,7 +2,7 @@
 
 > This code is just for sharing, please do not  copy it. 
 >
-> ​																					-- P. Liu
+> ​																																																-- P. Liu
 
 ## How to run?
 
@@ -17,6 +17,8 @@ Here are my env:
 ![Maven](G:\master_courses\Projects\reward_sys\img\Maven.PNG)
 
 After you download or clone from git, go to the path where pom.xml is(it should be: ``` */proj/reward_sys```), and run ```mvn spring-boot:run``` in cmd terminal. 
+
+When it is starting, go to ```localhost:8080``` (default) to check front end
 
 
 
