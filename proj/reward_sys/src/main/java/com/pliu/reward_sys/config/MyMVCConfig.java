@@ -10,7 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MyMVCConfig implements WebMvcConfigurer {
     @Bean
     public WebMvcConfigurer webMvcConfigurer(){
-        WebMvcConfigurer webMvcConfigurer = new WebMvcConfigurer() {
+
+        return new WebMvcConfigurer() {
             @Override
             public void addViewControllers(ViewControllerRegistry registry) {
                 registry.addViewController("/").setViewName("index");
@@ -18,7 +19,5 @@ public class MyMVCConfig implements WebMvcConfigurer {
             }
 
         };
-
-        return webMvcConfigurer;
     }
 }

@@ -29,10 +29,10 @@ public class RESTctrl {
         return modelAndView;
     }
 
-    @PostMapping("/*")
+    @PostMapping("/cal")
     public ModelAndView calculator(@RequestParam("cost") int cost){
 
-        ModelAndView modelAndView = new ModelAndView("index.html");
+        ModelAndView modelAndView = new ModelAndView("redirect:/index.html");
         Collection<Customer> customerCollection = myService.findAllCustomers();
         Collection<Transaction> transactionsCollection = myService.findAllTransaction();
         modelAndView.addObject("customers",customerCollection);
@@ -42,9 +42,26 @@ public class RESTctrl {
         modelAndView.addObject("calculator",true);
         modelAndView.addObject("cost",cost);
         modelAndView.addObject("credit",credit);
-//        modelAndView.setViewName("index");
 
         return modelAndView;
     }
 
+
+    @GetMapping("/index.html") // calculator=true&cost=123&credit=96
+    public ModelAndView redirector(@RequestParam("calculator") boolean calculator,
+                                   @RequestParam("cost") int cost,
+                                   @RequestParam("credit") int credit){
+        ModelAndView modelAndView = new ModelAndView("index");
+        if(calculator){
+            modelAndView.addObject("cost", cost);
+            modelAndView.addObject("credit", credit);
+        }
+        Collection<Customer> customerCollection = myService.findAllCustomers();
+        Collection<Transaction> transactionsCollection = myService.findAllTransaction();
+        modelAndView.addObject("customers",customerCollection);
+        modelAndView.addObject("transactions",transactionsCollection);
+        modelAndView.addObject("calculator",calculator);
+
+        return modelAndView;
+    }
 }

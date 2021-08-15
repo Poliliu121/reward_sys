@@ -9,8 +9,22 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div>
-    <table class="table table-dark table-striped" >
+
+
+<div name="Caculator" style="padding-bottom: 10px">
+    <h1>Credits Calculator</h1>
+    <form action="/cal" method="post" style="padding: 20px">
+        <input name = "cost" type="text">
+        <input value="Calculate" type="submit">
+        <br>
+        <span th:if="${calculator} != null" th:text=" ${cost} + ' credit is ' + ${credit} " > </span>
+
+    </form>
+</div>
+
+<h2>Personal Credits</h2>
+<div style="border-bottom: 1px solid black">
+    <table class="table table-dark table-striped" style="padding: 20px" >
         <tr>
             <th>Id</th>
             <th>Total Credits Earned</th>
@@ -25,9 +39,11 @@
         </tr>
     </table>
 </div>
-<br>
+
+
+<h2>Recent 3 Months Transaction History</h2>
 <div name = "TransactionHistory">
-    <table name = "TransactionHistory" class="table table-dark table-striped">
+    <table name = "TransactionHistory" class="table table-dark table-striped" style="padding: 20px">
         <tr>
             <th>customerId</th>
             <th>ID</th>
@@ -45,12 +61,6 @@
     </table>
 </div>
 
-<div name="Caculator">
-    <form action="/cal" method="post">
-        <input name = "cost" type="text">
-        <input value="Calculate" type="submit">
-    </form>
-    <span th:if="${calculator} != null" th:text=" ${cost} + ' credit is ' + ${credit} " > </span>
-</div>
+
 </body>
 </html>
