@@ -34,4 +34,4 @@ At the beginning, please allowed me to say a big sorry!!
 
 I am not good at UI part, so the front end page looks really simple:
 
-![Front End](G:\master_courses\Projects\reward_sys\img\Frontend.PNG)
+![Front End](img/Frontend.PNG)
