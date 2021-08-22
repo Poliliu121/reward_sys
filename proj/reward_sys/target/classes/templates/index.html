@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -7,23 +8,50 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .form{
+            padding: 20px;
+            border-bottom: 3px solid black;
+        }
+    </style>
 </head>
 <body>
 
+    <div class ="form" name="Caculator" >
+        <h1>Credits Calculator</h1>
+        <form action="/cal" method="get" style="padding: 20px">
+            <label>
+                <input name = "cost" type="text">
+            </label>
+            <input value="Calculate" type="submit">
+            <br>
+            <span th:if="${calculator} != null" th:text=" ${cost} + ' credit is ' + ${credit} " > </span>
 
-<div name="Caculator" style="padding-bottom: 10px">
-    <h1>Credits Calculator</h1>
-    <form action="/cal" method="post" style="padding: 20px">
-        <input name = "cost" type="text">
-        <input value="Calculate" type="submit">
-        <br>
-        <span th:if="${calculator} != null" th:text=" ${cost} + ' credit is ' + ${credit} " > </span>
+        </form>
+    </div>
+    <div  class ="form" name= "AddnewTransaction" >
+        <h1>Add new Transaction</h1>
 
-    </form>
-</div>
+        <form action="/add" method="post" >
+            <label>Customer ID</label>
+            <input name = "customerId" type="text"  >
+            <label>ID</label>
+            <input name = "Id" type="text" >
+            <label>Cost</label>
+            <input name="cost" type="text" >
+            <label >Date</label>
+            <input name = "date" type = "date" />
+
+
+            <input type="submit" value="submit">
+        </form>
+    </div>
+
+
 
 <h2>Personal Credits</h2>
-<div style="border-bottom: 1px solid black">
+
+<div style="border-bottom: 3px solid black">
     <table class="table table-dark table-striped" style="padding: 20px" >
         <tr>
             <th>Id</th>
@@ -41,19 +69,20 @@
 </div>
 
 
-<h2>Recent 3 Months Transaction History</h2>
+<h2>Transaction History</h2>
 <div name = "TransactionHistory">
     <table name = "TransactionHistory" class="table table-dark table-striped" style="padding: 20px">
         <tr>
-            <th>customerId</th>
             <th>ID</th>
+            <th>customerId</th>
             <th>Cost</th>
             <th>Date</th>
         </tr>
 
         <tr th:each="transaction : ${transactions}">
-            <td th:text="${transaction.getCustomerId()}"></td>
+
             <td th:text="${transaction.getId()}"></td>
+            <td th:text="${transaction.getCustomerId()}"></td>
             <td th:text="${transaction.getTotal_cost()}"></td>
             <td th:text="${transaction.getTransDate()}"></td>
 

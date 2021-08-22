@@ -12,7 +12,6 @@ import java.time.LocalDate;
 
 import java.time.Period;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MyService {
@@ -116,9 +115,23 @@ public class MyService {
     }
 
     public List<Transaction> findAllTransaction(){
-        List<Transaction> history = transactionDAO.findAll();
-        return history.stream().filter(this::isMonth).collect(Collectors.toList());
+        return transactionDAO.findAll();
     }
+
+    public List<Transaction> findByCustomerId(Customer customer){
+        return transactionDAO.findByCustomer(customer);
+    }
+
+    public Customer editnewInfo(Transaction transaction){
+        Customer customer = customerDAO.getById(transaction.getCustomerId());
+        int credits = calculator(transaction.getTotal_cost());
+        int credits3 = (isMonth(transaction))?credits : 0;
+        customer.setTotal_Credits(customer.getTotal_Credits() + credits);
+        customer.setThreeMonthCredits(customer.getThreeMonthCredits() + credits3);
+
+        return customer;
+    }
+
 
 
 }

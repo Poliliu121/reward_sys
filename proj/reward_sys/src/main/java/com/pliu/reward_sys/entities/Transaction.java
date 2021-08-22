@@ -1,6 +1,7 @@
 package com.pliu.reward_sys.entities;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -9,8 +10,12 @@ import java.util.Objects;
 public class Transaction {
 
     private Long customerId;
+
     private Long Id;
+
     private Integer total_cost;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate transDate;
 
     public Long getCustomerId() {
